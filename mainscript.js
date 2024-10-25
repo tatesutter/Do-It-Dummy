@@ -75,20 +75,25 @@ function notification() {
     }
 }
 
-function addReminder(title, description, dateTimeString) {
+function addReminder(title, description, scheduledTime) {
+
+    localStorage.setItem(title, description, scheduledTime);
+    localStorage.getItem(title, description, scheduledTime);
+    console.log(localStorage);
+
     let tableBody = document.getElementById("reminderTableBody");
+    let dayOfWeek = scheduledTime.toLocaleString('en-US', { weekday: 'long' }).toLowerCase();
+    let dayList = document.getElementById(`${dayOfWeek}-list`);
+    let listItem = document.createElement('li');
+    listItem.textContent = `${title}: ${description} at ${scheduledTime.toLocaleString()}`;
+    dayList.appendChild(listItem);
 
+    // Optionally, also add to the table for reference
     let row = tableBody.insertRow();
-
-    let titleCell = row.insertCell(0);
-    let descriptionCell = row.insertCell(1);
-    let dateTimeCell = row.insertCell(2);
-    let actionCell = row.insertCell(3);
-
-    titleCell.innerHTML = title;
-    descriptionCell.innerHTML = description;
-    dateTimeCell.innerHTML = dateTimeString;
-    actionCell.innerHTML = "<button onclick='deleteReminder(this)'>Delete</button>";
+    //row.insertCell(0).innerHTML = title;
+    //row.insertCell(1).innerHTML = description;
+    //row.insertCell(2).innerHTML = scheduledTime.toLocaleString();
+    row.insertCell(0).innerHTML = "<button onclick='deleteReminder()'>Delete</button>";
 }
 
 function deleteReminder(button) {
@@ -102,7 +107,9 @@ function deleteReminder(button) {
 }
 
 
-
+//function dateInput() {
+//    let dateInput = document.getElementById("date");
+//}
 
 function main() {
     notification();
