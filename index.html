@@ -14,22 +14,32 @@
   </head>
   <body>
     <div class="container bg-light">
-      <h2 class="text-center">Do It Dummy</h2>
+      <form>
+      <h2 id="title-h2" class="text-center">Do It Dummy</h2>
+      
+      <div class="input-container">
+        <label for="">Title</label>
+        <input type="text" name="title" id="title" />
+      </div>
+      <div class="input-container">
+        <label for="">Description</label>
+        <input type="text" name="description" id="description" />
+      </div>
+      <div class="input-container">
+        <label for="">Date</label>
+        <input type="date" name="date" id="date" />
+      </div>
+      <div class="input-container">
+        <label for="">Time</label>
+        <input type="time" name="time" id="time" />
+      </div>
 
-      <label for="">Title :</label>
-      <input type="text" name="title" id="title" />
-      <label for="">Description :</label>
-      <input type="text" name="description" id="description" />
-      <label for="">Date :</label>
-      <input type="date" name="date" id="date" />
-      <label for="">Time :</label>
-      <input type="time" name="time" id="time" />
-
-      <button style="width: 100%" onclick="scheduleReminder();">
+      <button id="form-button"  onclick="scheduleReminder();">
         Schedule Reminder
       </button>
+      </form>
 
-      <table border="1">
+      <table>
         <thead>
           <!-- <tr>
             <th>Title</th>
@@ -42,7 +52,7 @@
       </table>
     </div>
 
-    <div class="calendar1 text-center d-flex d-flex justify-content-evenly">
+    <div class="calendar text-center d-flex d-flex justify-content-evenly">
       <div class="day container">
         <h3>Monday</h3>
         <ul class="task-list" id="monday-list"></ul>
@@ -72,7 +82,7 @@
         <ul class="task-list" id="sunday-list"></ul>
       </div>
     </div>
-    <div class="calendar2 text-center d-flex d-flex justify-content-evenly">
+    <div class="calendar text-center d-flex d-flex justify-content-evenly">
       <div class="day container">
         <h3>Monday</h3>
         <ul class="task-list" id="monday-list"></ul>
