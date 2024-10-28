@@ -93,7 +93,7 @@ function addReminder(title, description, scheduledTime) {
     //row.insertCell(0).innerHTML = title;
     //row.insertCell(1).innerHTML = description;
     //row.insertCell(2).innerHTML = scheduledTime.toLocaleString();
-    row.insertCell(0).innerHTML = "<button onclick='deleteReminder()'>Delete</button>";
+    //row.insertCell(0).innerHTML = "<button onclick='deleteReminder()'>Delete</button>";
 }
 
 function deleteReminder(button) {
