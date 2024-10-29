@@ -1,56 +1,9 @@
-const insults = [
-    `You’re not just mediocre; you’re a shining example of how low the bar can go!`,
-    `If laziness were an Olympic sport, you’d win gold without breaking a sweat!`,
-    `You could be a genius, but it seems you’re too busy proving the opposite!`,
-    `Your potential is like a hidden treasure—buried deep and totally inaccessible!`,
-    `If you were any more unmotivated, you’d qualify as a speed bump on the road to success!`,
-    `You’ve mastered the art of setting the bar so low, even a snake couldn’t crawl under it!`,
-    `You’re like a cloud—full of potential but mostly just blocking the sun!`,
-    `At this rate, your biggest achievement will be breaking the record for most time wasted!`,
-    `You’re a procrastinator’s poster child; even deadlines are scared of you!`,
-    `If ignorance is bliss, you must be the happiest person on the planet!`
-];
-
-function generateInsult() {
-    const randomIndex = Math.floor(Math.random() * insults.length);
-    console.log(insults[randomIndex]);
-    return insults[randomIndex];
-}
-
-
-
-
-function insultMe() {
-    const insult = generateInsult();
-    textContent = insult;
-}
-
-function timer() {
-    
-}
-
-function notification() {
-    if ("Notification" in window) {
-        Notification.requestPermission().then(function (permission) {
-            if (permission === "granted") {
-                console.log("Notifications are allowed");
-            } else {
-                alert("Please allow notifications");
-                location.reload();
-            }
-        });
-    } else {
-        alert("This browser does not support notifications.");
-    }
-}
-
-    let timeoutIds = [];
-
- function scheduleReminder() {
+function scheduleReminder() {
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let date = document.getElementById("date").value;
     let time = document.getElementById("time").value;
+    let week = document.getElementById("week-select").value;
 
     let dateTimeString = date + " " + time;
     let scheduledTime = new Date(dateTimeString);
@@ -58,7 +11,7 @@ function notification() {
     let timeDifference = scheduledTime - currentTime;
 
     if (timeDifference > 0) {
-        addReminder(title, description, scheduledTime);
+        addReminder(title, description, scheduledTime, week);
 
         let timeoutId = setTimeout(function () {
             document.getElementById("notificationSound").play();
@@ -67,54 +20,75 @@ function notification() {
                 body: description,
                 requireInteraction: true
             });
-    }, timeDifference);
+        }, timeDifference);
 
-    timeoutIds.push(timeoutId);
+        timeoutIds.push(timeoutId);
     } else {
         alert("The scheduled time is in the past!");
     }
 }
 
-function addReminder(title, description, scheduledTime) {
-
-    localStorage.setItem(title, description, scheduledTime);
-    localStorage.getItem(title, description, scheduledTime);
-    console.log(localStorage);
-
-    let tableBody = document.getElementById("reminderTableBody");
+function addReminder(title, description, scheduledTime, week) {
     let dayOfWeek = scheduledTime.toLocaleString('en-US', { weekday: 'long' }).toLowerCase();
-    let dayList = document.getElementById(`${dayOfWeek}-list`);
+    let dayListId = week === 'week1' ? `${dayOfWeek}-list-week1` : `${dayOfWeek}-list-week2`;
+    let dayList = document.getElementById(dayListId);
+
+    
     let listItem = document.createElement('li');
-    listItem.textContent = `${title}: ${description} at ${scheduledTime.toLocaleString()}`;
+    listItem.dataset.title = title; 
+    listItem.dataset.week = week; 
+
+    let titleElement = document.createElement('span');
+    titleElement.textContent = title;
+    titleElement.style.cursor = 'pointer'; 
+    titleElement.onclick = function () {
+        descriptionElement.classList.toggle('d-none'); 
+    };
+
+
+    let descriptionElement = document.createElement('div');
+    descriptionElement.textContent = `${description} at ${scheduledTime.toLocaleString()}`;
+    descriptionElement.classList.add('d-none'); 
+
+
+    listItem.appendChild(titleElement);
+    listItem.appendChild(descriptionElement);
     dayList.appendChild(listItem);
 
-    // Optionally, also add to the table for reference
+    let tableBody = document.getElementById("reminderTableBody");
     let row = tableBody.insertRow();
-    //row.insertCell(0).innerHTML = title;
-    //row.insertCell(1).innerHTML = description;
-    //row.insertCell(2).innerHTML = scheduledTime.toLocaleString();
-    row.insertCell(0).innerHTML = "<button onclick='deleteReminder()'>Delete</button>";
+    row.dataset.title = title; 
+    row.dataset.week = week; 
+    row.insertCell(0).innerHTML = title;
+    row.insertCell(1).innerHTML = description;
+    row.insertCell(2).innerHTML = scheduledTime.toLocaleString();
+    row.insertCell(3).innerHTML = "<button onclick='deleteReminder(this)'>Complete Task</button>";
 }
 
 function deleteReminder(button) {
-    let row = button.closest("tr");
-    let index = row.rowIndex;
+    let congratsModal = new bootstrap.Modal(document.getElementById('congratsModal'));
+    congratsModal.show();
 
-    clearTimeout(timeoutIds[index - 1]);
-    timeoutIds.splice(index - 1, 1);
+   
+    document.getElementById('congratsModal').addEventListener('hidden.bs.modal', function () {
+       
+        let row = button.parentElement.parentElement;
+        let title = row.dataset.title;
+        let week = row.dataset.week;
+        row.remove();
 
-    row.remove();
+      
+        let dayOfWeek = new Date(row.cells[2].textContent).toLocaleString('en-US', { weekday: 'long' }).toLowerCase();
+        let dayListId = week === 'week1' ? `${dayOfWeek}-list-week1` : `${dayOfWeek}-list-week2`;
+        let dayList = document.getElementById(dayListId);
+        let listItems = dayList.getElementsByTagName('li');
+
+        
+        for (let item of listItems) {
+            if (item.dataset.title === title && item.dataset.week === week) {
+                item.remove();
+                break;
+            }
+        }
+    });
 }
-
-
-//function dateInput() {
-//    let dateInput = document.getElementById("date");
-//}
-
-function main() {
-    notification();
-}
-
-document.getElementById("reminderButton").addEventListener("click", scheduleReminder);
-
-main();
