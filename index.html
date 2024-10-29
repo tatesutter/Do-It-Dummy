@@ -27,26 +27,29 @@
 
         <label for="week-select">Select Week:</label>
         <select id="week-select">
-            <option value="week1">Week 1</option>
-            <option value="week2">Week 2</option>
+            <option id="week1" value="week1">Week 1</option>
+            <option id="week2" value="week2">Week 2</option>
         </select>
 
-        <button style="width: 100%" onclick="scheduleReminder();">
-            Schedule Reminder
-        </button>
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Date & Time</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="reminderTableBody"></tbody>
-        </table>
-    </div>
+        <button id="form-button" style="width: 100%" onclick="scheduleReminder();">
+          Schedule Reminder
+      </button>
+
+
+
+      <table border="1">
+        <thead>
+            <tr>
+                <th id="title1">Title</th>
+                <th id="description1">Description</th>
+                <th id="date1">Date & Time</th>
+                <th id="action1">Action</th>
+            </tr>
+        </thead>
+        <tbody id="reminderTableBody"></tbody>
+    </table>
+</div>
 
     <h3 class="text-center">Week 1</h3>
     <div class="calendar1 text-center d-flex justify-content-evenly">
