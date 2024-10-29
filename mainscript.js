@@ -33,32 +33,62 @@ function addReminder(title, description, scheduledTime, week) {
     let dayListId = week === 'week1' ? `${dayOfWeek}-list-week1` : `${dayOfWeek}-list-week2`;
     let dayList = document.getElementById(dayListId);
 
-    // Create a list item for the reminder
+    
     let listItem = document.createElement('li');
+    listItem.dataset.title = title; 
+    listItem.dataset.week = week; 
 
-    // Create a span for the title
     let titleElement = document.createElement('span');
     titleElement.textContent = title;
-    titleElement.style.cursor = 'pointer'; // Indicate that it's clickable
-    titleElement.onclick = function() {
-        descriptionElement.classList.toggle('d-none'); // Toggle visibility of description
+    titleElement.style.cursor = 'pointer'; 
+    titleElement.onclick = function () {
+        descriptionElement.classList.toggle('d-none'); 
     };
 
-    // Create a div for the description
+
     let descriptionElement = document.createElement('div');
     descriptionElement.textContent = `${description} at ${scheduledTime.toLocaleString()}`;
-    descriptionElement.classList.add('d-none'); // Hide description by default
+    descriptionElement.classList.add('d-none'); 
 
-    // Append title and description to the list item
+
     listItem.appendChild(titleElement);
     listItem.appendChild(descriptionElement);
     dayList.appendChild(listItem);
 
-    // Add to the reminder table
     let tableBody = document.getElementById("reminderTableBody");
     let row = tableBody.insertRow();
+    row.dataset.title = title; 
+    row.dataset.week = week; 
     row.insertCell(0).innerHTML = title;
     row.insertCell(1).innerHTML = description;
     row.insertCell(2).innerHTML = scheduledTime.toLocaleString();
-    row.insertCell(3).innerHTML = "<button onclick='deleteReminder(this)'>Delete</button>";
+    row.insertCell(3).innerHTML = "<button onclick='deleteReminder(this)'>Complete Task</button>";
+}
+
+function deleteReminder(button) {
+    let congratsModal = new bootstrap.Modal(document.getElementById('congratsModal'));
+    congratsModal.show();
+
+   
+    document.getElementById('congratsModal').addEventListener('hidden.bs.modal', function () {
+       
+        let row = button.parentElement.parentElement;
+        let title = row.dataset.title;
+        let week = row.dataset.week;
+        row.remove();
+
+      
+        let dayOfWeek = new Date(row.cells[2].textContent).toLocaleString('en-US', { weekday: 'long' }).toLowerCase();
+        let dayListId = week === 'week1' ? `${dayOfWeek}-list-week1` : `${dayOfWeek}-list-week2`;
+        let dayList = document.getElementById(dayListId);
+        let listItems = dayList.getElementsByTagName('li');
+
+        
+        for (let item of listItems) {
+            if (item.dataset.title === title && item.dataset.week === week) {
+                item.remove();
+                break;
+            }
+        }
+    });
 }
