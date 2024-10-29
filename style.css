@@ -11,7 +11,7 @@ body {
 .container {
     max-width: 800px;
     margin: auto;
-    background-color: transparent;
+    background-color: rgb(213, 241, 213);
     padding: 1px 20px 20px 20px;
     border-radius: 7px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -63,6 +63,28 @@ input {
     margin-top: 5px;
 }
 
+#week-selector{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    border-radius: 10px;
+
+}
+
+#week1{
+    background-color: hsl(130, 90%, 46%);
+    color: rgb(49, 46, 46);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#week2{
+    background-color: hsl(160, 49%, 48%);
+    color: rgb(87, 82, 82);
+    border-radius: 5px;
+    padding: 5px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -99,6 +121,39 @@ button {
     font-weight: bold;
 }
 
+#title1{
+    text-align: center;
+    margin-top: 20px;
+    font-family: Playwrite England SemiJoined;
+    font-style:italic;
+    font-size: larger;
+}
+
+#description1{
+    text-align: center;
+    margin-top: 20px;
+    font-family: Playwrite England SemiJoined;
+    font-style:italic;
+    font-size: larger;
+}
+
+#action1{
+    text-align: center;
+    margin-top: 20px;
+    font-family: Playwrite England SemiJoined;
+    font-style:italic;
+    font-size: larger;
+}
+
+#date1{
+    text-align: center;
+    margin-top: 20px;
+    font-family: Playwrite England SemiJoined;
+    font-style:italic;
+    font-size: larger;
+}
+
+
 button:hover {
     background-color: #6bd471;
 }
@@ -118,18 +173,20 @@ h3{
     background-color:transparent;
     padding: 10px;
     border-radius: 5px;
-    color: black;
+    color: rgba(12, 12, 12, 0.651);
     font-weight: bolder;
     width: 80%;
      margin: 20px auto;
 }
 
-.calendar .container{
-    background-color: rgb(234, 250, 223);
-    min-width: 170px;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-
+.task-list li {
+    margin-bottom: 10px;
 }
+.task-list span {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+
 
 
