@@ -61,3 +61,12 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.task-list li {
+    margin-bottom: 10px; /* Spacing between tasks */
+}
+
+.task-list span {
+    font-weight: bold; /* Make title bold */
+    color: #007bff; /* Bootstrap primary color */
+}

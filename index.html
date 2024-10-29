@@ -1,120 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
     />
-  </head>
-  <body>
+</head>
+<body>
     <div class="container bg-light">
-      <h2 class="text-center">Do It Dummy</h2>
+        <h2 class="text-center">Do It Dummy</h2>
 
-      <label for="">Title :</label>
-      <input type="text" name="title" id="title" />
-      <label for="">Description :</label>
-      <input type="text" name="description" id="description" />
-      <label for="">Date :</label>
-      <input type="date" name="date" id="date" />
-      <label for="">Time :</label>
-      <input type="time" name="time" id="time" />
+        <label for="">Title :</label>
+        <input type="text" name="title" id="title" />
+        <label for="">Description :</label>
+        <input type="text" name="description" id="description" />
+        <label for="">Date :</label>
+        <input type="date" name="date" id="date" />
+        <label for="">Time :</label>
+        <input type="time" name="time" id="time" />
 
-      <button style="width: 100%" onclick="scheduleReminder();">
-        Schedule Reminder
-      </button>
+        <label for="week-select">Select Week:</label>
+        <select id="week-select">
+            <option value="week1">Week 1</option>
+            <option value="week2">Week 2</option>
+        </select>
 
-      <table border="1">
-        <thead>
-          <!-- <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Date & Time</th>
-            <th>Action</th>
-          </tr> -->
-        </thead>
-        <tbody id="reminderTableBody"></tbody>
-      </table>
+        <button style="width: 100%" onclick="scheduleReminder();">
+            Schedule Reminder
+        </button>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date & Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="reminderTableBody"></tbody>
+        </table>
     </div>
 
-    <div class="calendar1 text-center d-flex d-flex justify-content-evenly">
-      <div class="day container">
-        <h3>Monday</h3>
-        <ul class="task-list" id="monday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Tuesday</h3>
-        <ul class="task-list" id="tuesday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Wednesday</h3>
-        <ul class="task-list" id="wednesday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Thursday</h3>
-        <ul class="task-list" id="thursday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Friday</h3>
-        <ul class="task-list" id="friday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Saturday</h3>
-        <ul class="task-list" id="saturday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Sunday</h3>
-        <ul class="task-list" id="sunday-list"></ul>
-      </div>
+    <h3 class="text-center">Week 1</h3>
+    <div class="calendar1 text-center d-flex justify-content-evenly">
+        <div class="day container">
+            <h3>Monday</h3>
+            <ul class="task-list" id="monday-list-week1"></ul>
+        </div>
+        <div class="day container">
+            <h3>Tuesday</h3>
+            <ul class="task-list" id="tuesday-list-week1"></ul>
+        </div>
+        <div class="day container">
+            <h3>Wednesday</h3>
+            <ul class="task-list" id="wednesday-list-week1"></ul>
+        </div>
+        <div class="day container">
+            <h3>Thursday</h3>
+            <ul class="task-list" id="thursday-list-week1"></ul>
+        </div>
+        <div class="day container">
+            <h3>Friday</h3>
+            <ul class="task-list" id="friday-list-week1"></ul>
+        </div>
+        <div class="day container">
+            <h3>Saturday</h3>
+            <ul class="task-list" id="saturday-list-week1"></ul>
+        </div>
+        <div class="day container">
+            <h3>Sunday</h3>
+            <ul class="task-list" id="sunday-list-week1"></ul>
+        </div>
     </div>
-    <div class="calendar2 text-center d-flex d-flex justify-content-evenly">
-      <div class="day container">
-        <h3>Monday</h3>
-        <ul class="task-list" id="monday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Tuesday</h3>
-        <ul class="task-list" id="tuesday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Wednesday</h3>
-        <ul class="task-list" id="wednesday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Thursday</h3>
-        <ul class="task-list" id="thursday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Friday</h3>
-        <ul class="task-list" id="friday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Saturday</h3>
-        <ul class="task-list" id="saturday-list"></ul>
-      </div>
-      <div class="day container">
-        <h3>Sunday</h3>
-        <ul class="task-list" id="sunday-list"></ul>
-      </div>
+
+    <h3 class="text-center">Week 2</h3>
+    <div class="calendar2 text-center d-flex justify-content-evenly">
+        <div class="day container">
+            <h3>Monday</h3>
+            <ul class="task-list" id="monday-list-week2"></ul>
+        </div>
+        <div class="day container">
+            <h3>Tuesday</h3>
+            <ul class="task-list" id="tuesday-list-week2"></ul>
+        </div>
+        <div class="day container">
+            <h3>Wednesday</h3>
+            <ul class="task-list" id="wednesday-list-week2"></ul>
+        </div>
+        <div class="day container">
+            <h3>Thursday</h3>
+            <ul class="task-list" id="thursday-list-week2"></ul>
+        </div>
+        <div class="day container">
+            <h3>Friday</h3>
+            <ul class="task-list" id="friday-list-week2"></ul>
+        </div>
+        <div class="day container">
+            <h3>Saturday</h3>
+            <ul class="task-list" id="saturday-list-week2"></ul>
+        </div>
+        <div class="day container">
+            <h3>Sunday</h3>
+            <ul class="task-list" id="sunday-list-week2"></ul>
+        </div>
     </div>
 
     <audio src="rick roll.mp3" id="notificationSound"></audio>
 
-    <script src="mainscript.js">
-      // ask user to allow notification access
-    </script>
+    <script src="mainscript.js"></script>
 
-    <!-- STYLE/JS -->
-    <!---->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
     ></script>
-  </body>
+</body>
 </html>
+
