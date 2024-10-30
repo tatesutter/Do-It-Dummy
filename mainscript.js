@@ -4,6 +4,7 @@ function scheduleReminder() {
     let date = document.getElementById("date").value;
     let time = document.getElementById("time").value;
     let week = document.getElementById("week-select").value;
+    
 
     let dateTimeString = date + " " + time;
     let scheduledTime = new Date(dateTimeString);
@@ -16,7 +17,7 @@ function scheduleReminder() {
         let timeoutId = setTimeout(function () {
             document.getElementById("notificationSound").play();
 
-            let notification = new Notification(title, {
+            let Notification = new Notification(title, {
                 body: description,
                 requireInteraction: true
             });
@@ -44,7 +45,12 @@ function addReminder(title, description, scheduledTime, week) {
     titleElement.onclick = function () {
         descriptionElement.classList.toggle('d-none'); 
     };
-
+    
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("date").value = "";
+    document.getElementById("time").value = "";
+    document.getElementById("week-select").value = "week1";
 
     let descriptionElement = document.createElement('div');
     descriptionElement.textContent = `${description} at ${scheduledTime.toLocaleString()}`;
