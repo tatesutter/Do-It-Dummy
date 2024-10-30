@@ -14,8 +14,9 @@ body {
     background-color: #2d2e5e88;
     background-color: transparent;
     padding: 1px 20px 20px 20px;
-    border-radius: 7px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: solid 1px;
 }
 #title-h2{
     color: hsl(158, 57%, 58%);
@@ -136,6 +137,8 @@ h3{
     margin-top: 20px;
     background-color: transparent;
     border-radius: 8px;
+    color: white;
+    
 }
 .calendar1{
     display: flex;
@@ -143,7 +146,8 @@ h3{
     margin-top: 20px;
     background-color: rgb(196, 240, 196);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
+    gap: 1px;
 
 }
 .calendar2{
@@ -152,6 +156,45 @@ h3{
     margin-top: 20px;
     background-color: rgb(196, 240, 196);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
+    flex: 1 1 30%;
+    gap: 1px;
 
 }
+
+.calendar1, .calendar2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; 
+    gap: 5px; 
+}
+.day {
+    flex: 1 1 150px; 
+    min-width: 150px; 
+    max-width: 250px; 
+    text-align: center;
+    box-sizing: border-box;
+}
+@media (max-width: 768px) {
+    .calendar1, .calendar2 {
+        justify-content: center; 
+    }
+    .day {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .day {
+        flex: 1 1 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
