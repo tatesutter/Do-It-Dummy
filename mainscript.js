@@ -23,7 +23,6 @@ function scheduleReminder() {
             });
         }, timeDifference);
 
-        timeoutIds.push(timeoutId);
     } else {
         alert("The scheduled time is in the past!");
     }
