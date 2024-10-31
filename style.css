@@ -18,79 +18,95 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: solid 1px;
 }
+
 #title-h2{
     color: hsl(158, 57%, 58%);
     font-weight: bold;
 }
+
 input{
     border-width: 0px 0px 3px 0px;
     border-color: hsl(158, 43%, 52%);
     background-color: transparent;
 }
+
 .day {
     height: 200px;
 }
+
 .input-container label{
     margin: 0px;
 }
+
 label,
 input,
 button {
     margin: 10px 0;
     box-sizing: border-box;
 }
+
 label{
     font-family: montserrat alternate;
     color: gray;
 }
+
 form{
     display: flex;
     flex-direction: column;
     background-color: transparent;
 }
+
 input {
     width: 100%;
     margin-top: 5px;
 }
+
 #week-selector{
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
     border-radius: 10px;
 }
+
 #week1{
     background-color: hsl(130, 90%, 46%);
     color: rgb(49, 46, 46);
     border-radius: 5px;
     padding: 5px;
 }
+
 #week2{
     background-color: hsl(160, 49%, 48%);
     color: rgb(87, 82, 82);
     border-radius: 5px;
     padding: 5px;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
+
 th,
 td {
     padding: 5px;
     border: 1px solid #ddd;
     text-align: center;
 }
+
 th {
     background-color: #4CAF50;
     color: white;
 }
+
 button {
     background-color: #4CAF50;
     color: white;
     padding: 5px;
     border: none;
 }
+
 #form-button{
     border-radius: 50px;
     margin-top: 20px;
@@ -100,6 +116,7 @@ button {
     height: 50px;
     font-weight: bold;
 }
+
 #title1{
     text-align: center;
     margin-top: 20px;
@@ -107,6 +124,7 @@ button {
     font-style:italic;
     font-size: larger;
 }
+
 #description1{
     text-align: center;
     margin-top: 20px;
@@ -114,6 +132,7 @@ button {
     font-style:italic;
     font-size: larger;
 }
+
 #action1{
     text-align: center;
     margin-top: 20px;
@@ -121,6 +140,7 @@ button {
     font-style:italic;
     font-size: larger;
 }
+
 #date1{
     text-align: center;
     margin-top: 20px;
@@ -128,6 +148,7 @@ button {
     font-style:italic;
     font-size: larger;
 }
+
 button:hover {
     background-color: #45a049;
 }
@@ -140,6 +161,7 @@ h3{
     color: white;
     
 }
+
 .calendar1{
     display: flex;
     justify-content: space-between;
@@ -150,6 +172,7 @@ h3{
     gap: 1px;
 
 }
+
 .calendar2{
     display: flex;
     justify-content: space-between;
@@ -168,6 +191,7 @@ h3{
     justify-content: space-evenly; 
     gap: 5px; 
 }
+
 .day {
     flex: 1 1 150px; 
     min-width: 150px; 
@@ -175,6 +199,7 @@ h3{
     text-align: center;
     box-sizing: border-box;
 }
+
 @media (max-width: 768px) {
     .calendar1, .calendar2 {
         justify-content: center; 
