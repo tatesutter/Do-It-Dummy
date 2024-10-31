@@ -34,7 +34,7 @@ There is no configuration required for this application.
 - 
 
 ## FAQ
-- How do I add a new task to my calendar?
-- How do I mark an item for completion?
+- How do I add a new task to my calendar? Populate the Title, Description, Date, and Time fields.  Then click the "Schedule Reminder" button.
+- How do I mark an item for completion? After a task has been added, locate the task, and click the "Complete" button.
 - Can I schedule a task beyond 2 weeks from my current date?
 - How many possible insults are there for the calendar?
