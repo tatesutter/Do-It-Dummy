@@ -1,20 +1,13 @@
 const ARRAY_KEY = "schedule";
+let timeoutId
 
-function generateInsult() {
-    const insults = [
-        `You’re not just mediocre; you’re a shining example of how low the bar can go!`,
-        `If laziness were an Olympic sport, you’d win gold without breaking a sweat!`,
-        `You could be a genius, but it seems you’re too busy proving the opposite!`,
-        `Your potential is like a hidden treasure—buried deep and totally inaccessible!`,
-        `If you were any more unmotivated, you’d qualify as a speed bump on the road to success!`,
-        `You’ve mastered the art of setting the bar so low, even a snake couldn’t crawl under it!`,
-        `You’re like a cloud—full of potential but mostly just blocking the sun!`,
-        `At this rate, your biggest achievement will be breaking the record for most time wasted!`,
-        `You’re a procrastinator’s poster child; even deadlines are scared of you!`,
-        `If ignorance is bliss, you must be the happiest person on the planet!`
-    ];
-    return insults[Math.floor(Math.random() * insults.length)];
-}
+const insults = [
+    "You're as useful as a screen door on a submarine!",
+    "I'd explain it to you, but I left my English-to-Dingbat dictionary at home.",
+    "You're like a software update. Whenever I see you, I think, 'Not now.'",
+    "If ignorance is bliss, you must be the happiest person on the planet.",
+    "I'd agree with you, but then we'd both be wrong."
+];
 
 function scheduleReminder() {
     let title = document.getElementById("title").value;
@@ -62,6 +55,7 @@ function addReminder(title, description, scheduledTime, week) {
     let dayList = document.getElementById(dayListId);
 
     console.log(dayListId);
+    console.log(dayList);
 
     // create list item
     
@@ -110,21 +104,54 @@ function addReminder(title, description, scheduledTime, week) {
     row.insertCell(3).innerHTML = "<button onclick='deleteReminder(this)'>Complete Task</button>";
 };
 
-function setTimerForTask(title, timeDifference) {
-    const reminderIntervals = [300000, 240000, 180000, 120000, 60000]; // 5min, 4min, 3min, 2min, 1min
-    reminderIntervals.forEach((interval, index) => {
-        setTimeout(() => {
-            alert(insults[index]);
-        }, timeDifference - interval);
-    });
-    setTimeout(() => {
+function setTimerForTask(title = "Times Up!",) {
+    const insults = [
+        "You're as useful as a screen door on a submarine!",
+        "I'd explain it to you, but I left my English-to-Dingbat dictionary at home.",
+        "You're like a software update. Whenever I see you, I think, 'Not now.'",
+        "If ignorance is bliss, you must be the happiest person on the planet.",
+        "I'd agree with you, but then we'd both be wrong."
+    ];
+    //const reminderIntervals = [300000, 240000, 180000, 120000, 60000]; // 5min, 4min, 3min, 2min, 1min
+    //console.log(reminderIntervals);
+
+    // Check notification permissions
+    //if (Notification.permission !== "granted") {
+    //    Notification.requestPermission();
+    //}
+    //console.log(Notification.permission)
+
+    // reminderIntervals.forEach((interval, index) => {
+    //     if (timeDifference > interval) { // Only set reminders if there's enough time
+    //         setTimeout(() => {
+    //             alert(insults[index]);
+    //         }, timeDifference - interval);
+    //    }
+    //});
+    //console.log(timeDifference);
+    const timeRemaining = 5000
+
+
+    console.log("Starting timer");
+    
+    timeoutId = setTimeout(() => {
+        console.log("times up playing sound")
         document.getElementById("notificationSound").play();
-        new Notification(title, {
-            body: "Time's up! You should've done this already!",
-            requireInteraction: true
-        });
-    }, timeDifference);
-}
+        if (Notification.permission === "granted") {
+            new Notification(title, {
+                body: "Time's up! You should've done this already!",
+                requireInteraction: true
+            });
+        }
+
+        alert(insults[Math.floor(Math.random() * insults.length)])
+    }, timeRemaining);
+    //console.log("Nevermind, cancelling timer");
+    //clearTimeout(timeoutId);
+    
+    
+};
+
 
 function deleteReminder(button) {
     let congratsModal = new bootstrap.Modal(document.getElementById('congratsModal'));
@@ -188,3 +215,5 @@ function pageLoad() {
 //}
 
 pageLoad();
+
+setTimerForTask();
