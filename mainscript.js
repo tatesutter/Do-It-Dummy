@@ -177,14 +177,14 @@ function pageLoad() {
     }
 }
 
-function alerts() {
-    const currentTime = new Date();
-    const timeDifference = finalDateTime - currentTime;
-    while (timeDifference > 0) {
-        setTimeout(5000);
-    }
-    const insult = generateInsult();
-    alert(insult);
-}
+//function alerts() {
+//    const currentTime = new Date();
+//    const timeDifference = finalDateTime - currentTime;
+//    while (timeDifference > 0) {
+//        setTimeout(5000);
+//    }
+//    const insult = generateInsult();
+//    alert(insult);
+//}
 
 pageLoad();
