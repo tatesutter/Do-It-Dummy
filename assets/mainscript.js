@@ -45,7 +45,7 @@ function scheduleReminder() {
         let timeoutId = setTimeout(function () {
             document.getElementById("notificationSound").play();
 
-            let Notification = new Notification(title, {
+            let notification = new Notification(title, {
                 body: description,
                 requireInteraction: true
             });
