@@ -23,16 +23,12 @@ function scheduleReminder() {
     let time = document.getElementById("time").value;
     let week = document.getElementById("week-select").value;
 
-        // set local storage
-
+    
     const jsonSchedule = localStorage.getItem(ARRAY_KEY);
     const array = (jsonSchedule) ? JSON.parse(jsonSchedule) : [];
-
     const object = {title, description, date, time, week};
     array.push(object);
-
     localStorage.setItem(ARRAY_KEY, JSON.stringify(array));
-    
 
     let dateTimeString = date + " " + time;
     let scheduledTime = new Date(dateTimeString);
@@ -41,36 +37,23 @@ function scheduleReminder() {
 
     if (timeDifference > 0) {
         addReminder(title, description, scheduledTime, week);
-
-        let timeoutId = setTimeout(function () {
-            document.getElementById("notificationSound").play();
-
-            let notification = new Notification(title, {
-                body: description,
-                requireInteraction: true
-            });
-        }, timeDifference);
-
+        startReminderTimer(title, description, scheduledTime, timeDifference);
     } else {
         alert("The scheduled time is in the past!");
     }
-};
+}
 
 function addReminder(title, description, scheduledTime, week) {
     let dayOfWeek = scheduledTime.toLocaleString('en-US', { weekday: 'long' }).toLowerCase();
     let dayListId = week === 'week1' ? `${dayOfWeek}-list-week1` : `${dayOfWeek}-list-week2`;
     let dayList = document.getElementById(dayListId);
 
-    console.log(dayListId);
-
-    // create list item
     
     let listItem = document.createElement('li');
     listItem.dataset.title = title; 
     listItem.dataset.week = week; 
 
-    // create title element
-
+    
     let titleElement = document.createElement('span');
     titleElement.textContent = title;
     titleElement.style.cursor = 'pointer'; 
@@ -78,7 +61,6 @@ function addReminder(title, description, scheduledTime, week) {
         descriptionElement.classList.toggle('d-none'); 
     };
 
-    // empties the input fields
     
     document.getElementById("title").value = "";
     document.getElementById("description").value = "";
@@ -86,20 +68,17 @@ function addReminder(title, description, scheduledTime, week) {
     document.getElementById("time").value = "";
     document.getElementById("week-select").value = "week1";
 
-    // create description element
-
+    
     let descriptionElement = document.createElement('div');
     descriptionElement.textContent = `${description} at ${scheduledTime.toLocaleString()}`;
     descriptionElement.classList.add('d-none'); 
 
-    // append elements to list item
-
+    
     listItem.appendChild(titleElement);
     listItem.appendChild(descriptionElement);
     dayList.appendChild(listItem);
 
-    // add to table
-
+    
     let tableBody = document.getElementById("reminderTableBody");
     let row = tableBody.insertRow();
     row.dataset.title = title; 
@@ -108,22 +87,28 @@ function addReminder(title, description, scheduledTime, week) {
     row.insertCell(1).innerHTML = description;
     row.insertCell(2).innerHTML = scheduledTime.toLocaleString();
     row.insertCell(3).innerHTML = "<button onclick='deleteReminder(this)'>Complete Task</button>";
-};
+}
 
-function setTimerForTask(title, timeDifference) {
-    const reminderIntervals = [300000, 240000, 180000, 120000, 60000]; // 5min, 4min, 3min, 2min, 1min
-    reminderIntervals.forEach((interval, index) => {
-        setTimeout(() => {
-            alert(insults[index]);
-        }, timeDifference - interval);
-    });
-    setTimeout(() => {
-        document.getElementById("notificationSound").play();
-        new Notification(title, {
-            body: "Time's up! You should've done this already!",
-            requireInteraction: true
-        });
-    }, timeDifference);
+function startReminderTimer(title, description, finalDateTime, timeDifference) {
+    const insultInterval = 1 * 30 * 1000; 
+    const oneHourBeforeEnd = new Date(finalDateTime - 60 * 60 * 1000); 
+
+    const interval = setInterval(() => {
+        const currentTime = new Date();
+        const remainingTime = finalDateTime - currentTime;
+
+        if (remainingTime <= 0) {
+            clearInterval(interval);
+            document.getElementById("notificationSound").play();
+            new Notification(title, {
+                body: "Time's up! You should've done this already!",
+                requireInteraction: true
+            });
+        } else if (currentTime >= oneHourBeforeEnd && remainingTime % insultInterval < 5000) {
+            const insult = generateInsult();
+            alert(insult);
+        }
+    }, 5000);
 }
 
 function deleteReminder(button) {
@@ -131,31 +116,22 @@ function deleteReminder(button) {
     congratsModal.show();
 
     document.getElementById('congratsModal').addEventListener('hidden.bs.modal', function () {
-        // Find the row and retrieve task details
         let row = button.parentElement.parentElement;
         let title = row.dataset.title;
         let week = row.dataset.week;
         
-        // Remove the row from the table
         row.remove();
 
-        // Get the schedule array from local storage
         const jsonSchedule = localStorage.getItem(ARRAY_KEY);
         let array = (jsonSchedule) ? JSON.parse(jsonSchedule) : [];
-
-        // Filter out the completed task based on title and week
         array = array.filter(task => !(task.title === title && task.week === week));
-        
-        // Save the updated array back to local storage
         localStorage.setItem(ARRAY_KEY, JSON.stringify(array));
 
-        // Remove the item from the day list as well
         let dayOfWeek = new Date(row.cells[2].textContent).toLocaleString('en-US', { weekday: 'long' }).toLowerCase();
         let dayListId = week === 'week1' ? `${dayOfWeek}-list-week1` : `${dayOfWeek}-list-week2`;
         let dayList = document.getElementById(dayListId);
         let listItems = dayList.getElementsByTagName('li');
 
-        // Find and remove the list item from the day list
         for (let item of listItems) {
             if (item.dataset.title === title && item.dataset.week === week) {
                 item.remove();
@@ -163,28 +139,15 @@ function deleteReminder(button) {
             }
         }
     });
-};
+}
 
 function pageLoad() {
-
-    // get local storage
     const jsonSchedule = localStorage.getItem(ARRAY_KEY);
     const array = (jsonSchedule) ? JSON.parse(jsonSchedule) : [];
-
     for (let object of array) {
         const {title, description, date, time, week} = object;
         addReminder(title, description, new Date(date + " " + time), week);
     }
 }
-
-//function alerts() {
-//    const currentTime = new Date();
-//    const timeDifference = finalDateTime - currentTime;
-//    while (timeDifference > 0) {
-//        setTimeout(5000);
-//    }
-//    const insult = generateInsult();
-//    alert(insult);
-//}
 
 pageLoad();
