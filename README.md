@@ -2,9 +2,9 @@
 
 
 ## INTRODUCTION
-The Witty Calendar is a fun, snarky way to track tasks and important dates that a regular calendar cannot provide.
+The Do it, Dummy Calendar is a fun, snarky way to track tasks and important dates that a regular calendar cannot provide.
 Most calendars only provide the ability to jot a date, time, and the task to remember.
-The Witty Calendar provides users with the motivation to complete their tasks on time.
+The Do it, Dummy Calendar provides users with the motivation to complete their tasks on time.
 Because if they miss their due date, they will be insulted.
 Not only does the calendar keep users motivated, but it is also entertaining.
 
@@ -58,4 +58,4 @@ There is no configuration required for this application.
 - How many possible insults are there for the calendar? 
     - There are currently 5 possible insults that will pop up.
 - How are insults selected to be displayed?  
-    - The Witty Calendar application randomly picks an insult to display when a user misses completing a task on time.
+    - The Do it, Dummy Calendar application randomly picks an insult to display when a user misses completing a task on time.
