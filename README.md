@@ -5,14 +5,13 @@
 The Do it, Dummy Calendar is a fun, snarky way to track tasks and important dates that a regular calendar cannot provide.
 Most calendars only provide the ability to jot a date, time, and the task to remember.
 The Do it, Dummy Calendar provides users with the motivation to complete their tasks on time.
-Because if they miss their due date, they will be insulted.
+Because if they start to run out of time, or miss their due date entirely, they will be insulted.
 Not only does the calendar keep users motivated, but it is also entertaining.
 
 ## REQUIREMENTS
 - Must have an internet connection to access the website.
 - User must have a task that has a set deadline.
 - The user must have a task that is due within the next 2 weeks.  The calendar is currently limited to a 2-week period for adding tasks.
-
 
 ## INSTALLATION
 There is no installation required for this application. The user can access the URL via their preferred web browser and use the application.
@@ -58,4 +57,4 @@ There is no configuration required for this application.
 - How many possible insults are there for the calendar? 
     - There are currently 5 possible insults that will pop up.
 - How are insults selected to be displayed?  
-    - The Do it, Dummy Calendar application randomly picks an insult to display when a user misses completing a task on time.
+    - The Do it, Dummy Calendar application randomly picks an insult to display when a user misses completing a task on time.  Each of the insults will start popping up in 30 second increments within 5 minutes of the task due date expiring.
